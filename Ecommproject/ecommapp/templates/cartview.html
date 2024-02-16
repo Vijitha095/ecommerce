@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div class="container">
+    {% for cart in cart %}
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        
+        <div class="col-6 mb-5">
+            <div class="card h-100">
+                <!-- Product image-->
+                <img class="card-img-top" src="{{cart.product.image.url}}" alt="..." />
+                <!-- Product details-->
+                <div class="card-body p-4">
+                    <div class="text-center">
+                        <!-- Product name-->
+                        <h5 class="fw-bolder">{{cart.product.product_name}}</h5>
+                        <!-- Product price-->
+                        {{cart.product.price}}
+                    </div>
+                </div>
+                
+               
+            </div>
+        </div>
+        <div class="col-2">
+            <h6>STATUS:{{cart.status}}</h6><br>
+            <h6>QUANTITY:{{cart.quantity}}</h6><br>
+        </div>
+        <div class="col-2">
+            <a href="{% url 'cart_delete' cart.id %}" class="btn btn-danger">Remove</a>
+            <a href="{% url 'placeorder' cart.id cart.product.id %}" class="btn btn-success">place order</a>
+        </div>
+        
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
